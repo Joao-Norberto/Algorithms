@@ -7,7 +7,8 @@ int main(int argc, const char* argv[])
     if (numbers[numbers_size] < numbers[numbers_size-1])
     {
         aux = numbers[numbers_size];
-        numbers[numbers_size-1] = numbers[numbers_size];
+        numbers[numbers_size] = numbers[numbers_size-1];
+        numbers[numbers_size-1] = aux;       
     }
     for(int i = 0; i < sizeof(numbers)/sizeof(int); i++)
     {
