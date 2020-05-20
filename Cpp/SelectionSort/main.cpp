@@ -1,26 +1,51 @@
 #include <iostream>
 
+void printOrder(int num[], int indexSize)
+{
+    for(int i = 0; i < indexSize; i++)
+    {
+        std::cout << num[i];
+        i == indexSize-1 ? std::cout << "." : std::cout << ", ";
+    }
+    std::cout << "\033[m" << std::endl;
+}
+
 int main(int argc, const char *argv[])
 {
-    int numbers[] = {6, 1, 7, 8, 9, 3, 5, 4, 2};
-    int numbers_indexSize = sizeof(numbers) / sizeof(int), numbers_lowest;
+    int numbers[] = {3, 1, 2, 5, 7, 6, 8, 9, 10};
+    int numbers_indexSize = sizeof(numbers) / sizeof(int), aux, lowest_num, lowest_numIndex, numbers_ordenedIndex;
 
-    for (int i = 0; i < numbers_indexSize; i++)
+    std::cout << "\033[1;31m", std::cout << "Entrada -> ";
+    printOrder(numbers, numbers_indexSize);
+
+    for (numbers_ordenedIndex = 0; numbers_ordenedIndex < numbers_indexSize; numbers_ordenedIndex++)
     {
-        if (i == 0)
+        for (int i = numbers_ordenedIndex; i < numbers_indexSize; i++)
         {
-            numbers_lowest = numbers[i];
-        }
-        else
-        {
-            if (numbers[i] < numbers_lowest)
+            if (i == numbers_ordenedIndex)
             {
-                numbers_lowest = numbers[i];
+                lowest_num = numbers[i];
+            }
+            else
+            {
+                if (numbers[i] < lowest_num)
+                {
+                    lowest_num = numbers[i];
+                    lowest_numIndex = i;
+                }
             }
         }
+        if (lowest_num != numbers[numbers_ordenedIndex])
+        {
+            aux = numbers[numbers_ordenedIndex];
+            numbers[numbers_ordenedIndex] = numbers[lowest_numIndex];
+            numbers[lowest_numIndex] = aux;
+        }
+        printOrder(numbers, numbers_indexSize);
     }
 
-    std::cout << "O menor número é: " << numbers_lowest << std::endl;
+    std::cout << "\033[1;32m", std::cout << "Saída -> ";
+    printOrder(numbers, numbers_indexSize);
 
     return 0;
 }
