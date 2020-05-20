@@ -34,4 +34,6 @@ int main(int argc, const char *argv[])
     }
     std::cout << "\033[1;32m";
     printOrder(numbers, vector_indexSize);
+
+    return 0;
 }
